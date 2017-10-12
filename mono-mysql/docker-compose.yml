@@ -1,0 +1,20 @@
+version: '2'
+services:
+    db:
+        build: mysql
+        volumes:
+            - ./data:/var/lib/mysql
+        ports:
+            - 6603:3306
+        environment:
+        - MYSQL_ROOT_PASSWORD=back
+        - MYSQL_DATABASE=back
+        - MYSQL_USER=back
+        - MYSQL_PASSWORD=back
+    back:
+        build: mono
+        tty: true
+        links:
+            - db
+        depends_on:
+            - db
